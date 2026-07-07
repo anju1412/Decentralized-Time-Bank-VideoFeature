@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useAccount, usePublicClient } from 'wagmi'
 import { CONTRACTS } from '../lib/contracts'
 
 export default function EscrowHistory() {
-  const { address } = useAccount()
+  useAccount()
   const client = usePublicClient()
   const escrow = CONTRACTS.sepolia.timeEscrow as `0x${string}`
 
-  const [logs, setLogs] = React.useState<any[]>([])
+  const [logs, setLogs] = useState<any[]>([])
 
-  React.useEffect(() => {
+  useEffect(() => {
     let ignore = false
     async function run() {
       try {
@@ -26,7 +26,9 @@ export default function EscrowHistory() {
           '0x8c21f1c8f9b278ad8d67e8a4b7f0b6127fef3f65b3f6f0b4b9d0de9c1e45d4f2'
         ]
 
-        const fromBlock = '0x0'
+        const fromBlock = 0n
+
+        if (!client) return
         const [created, released, cancelled] = await Promise.all([
           client.getLogs({ address: escrow, fromBlock, topics: [topicsCreated] }),
           client.getLogs({ address: escrow, fromBlock, topics: [topicsReleased] }),
