@@ -1,12 +1,10 @@
-import React from 'react'
 import { useAccount, useReadContract } from 'wagmi'
 import { erc20Abi } from '../lib/abi'
 import { CONTRACTS } from '../lib/contracts'
-import { sepolia, polygonMumbai } from 'wagmi/chains'
+import { sepolia } from 'wagmi/chains'
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount()
-  const chainId = sepolia.id // default display
   const tokenAddress = CONTRACTS.sepolia.timeToken
 
   const { data: balance } = useReadContract({
