@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 // Removed ConnectButton here; we keep the one in the page header
 
