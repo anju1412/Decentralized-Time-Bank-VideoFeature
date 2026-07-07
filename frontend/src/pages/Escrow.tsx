@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt, useConfig } from 'wagmi'
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { erc20Abi, timeEscrowAbi } from '../lib/abi'
 import { CONTRACTS } from '../lib/contracts'
 
