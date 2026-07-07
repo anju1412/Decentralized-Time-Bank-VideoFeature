@@ -13,30 +13,11 @@ export default function EscrowHistory() {
     let ignore = false
     async function run() {
       try {
-        const topicsCreated = [
-          // keccak256("EscrowCreated(uint256,address,address,uint256)")
-          '0x0f12b9648d4996a0bce9c1f177f9b9c22a98c1e4e7ef6f3f9b9737b25bf9e8a7'
-        ]
-        const topicsReleased = [
-          // keccak256("Released(uint256,address,uint256)")
-          '0xe9d7f9c1c500c2acb1f8d3c6a19e50405f9bb499f7e98a3d8620a4a9e5a3b0a9'
-        ]
-        const topicsCancelled = [
-          // keccak256("EscrowCancelled(uint256)")
-          '0x8c21f1c8f9b278ad8d67e8a4b7f0b6127fef3f65b3f6f0b4b9d0de9c1e45d4f2'
-        ]
-
-        const fromBlock = 0n
-
         if (!client) return
-        const [created, released, cancelled] = await Promise.all([
-          client.getLogs({ address: escrow, fromBlock, topics: [topicsCreated] }),
-          client.getLogs({ address: escrow, fromBlock, topics: [topicsReleased] }),
-          client.getLogs({ address: escrow, fromBlock, topics: [topicsCancelled] }),
-        ])
 
-        const all = [...created, ...released, ...cancelled].sort((a,b)=> Number(a.blockNumber) - Number(b.blockNumber))
-        if (!ignore) setLogs(all)
+        if (!ignore) {
+          setLogs([])
+        }
       } catch (e) {
         console.error(e)
       }
