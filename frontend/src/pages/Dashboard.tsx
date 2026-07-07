@@ -1,7 +1,7 @@
+import { useMemo } from 'react'
 import { useAccount, useReadContract } from 'wagmi'
 import { erc20Abi } from '../lib/abi'
 import { CONTRACTS } from '../lib/contracts'
-import { sepolia } from 'wagmi/chains'
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount()
@@ -27,7 +27,7 @@ export default function Dashboard() {
     functionName: 'symbol',
   })
 
-  const formatted = React.useMemo(() => {
+  const formatted = useMemo(() => {
     if (balance == null || decimals == null) return '...'
     const d = Number(decimals)
     const factor = 10 ** d
